@@ -40,7 +40,9 @@
         }
 
         html {
-            scroll-behavior: smooth
+            scroll-behavior: smooth;
+            width: 100%;
+            overflow-x: hidden
         }
 
         body {
@@ -49,7 +51,7 @@
             color: var(--text);
             font-size: 16px;
             line-height: 1.6;
-            overflow-x: hidden;
+            overflow-x: hidden
         }
 
         /* HEADER */
@@ -223,29 +225,7 @@
                 transform: scaleY(1.25)
             }
         }
-        html, body {
-  width: 100%;
-  overflow-x: hidden;
-}
 
-.hero-inner {
-  grid-template-columns: 1fr 1fr;
-}
-
-@media (max-width: 768px) {
-  .hero-inner {
-    grid-template-columns: 1fr;
-  }
-}
-@media (max-width: 480px) {
-  .floating-wa,
-  .floating-call {
-    width: 50px;
-    height: 50px;
-    padding: 0;
-    justify-content: center;
-  }
-}
         .hero h1 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(1.9rem, 3.8vw, 3.1rem);
@@ -581,6 +561,335 @@
             font-weight: 700;
             padding: 4px 12px;
             border-radius: 100px
+        }
+
+        /* ══ MACHINE TYPES ══ */
+        .machines-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin-top: 44px
+        }
+
+        .machine-card {
+            background: var(--white);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1.5px solid var(--border);
+            box-shadow: 0 2px 16px rgba(10, 110, 189, 0.07);
+            transition: transform .25s, box-shadow .25s, border-color .25s;
+            display: flex;
+            flex-direction: column
+        }
+
+        .machine-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(10, 110, 189, 0.18);
+            border-color: var(--blue)
+        }
+
+        .machine-banner {
+            position: relative;
+            background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 100%);
+            padding: 32px 24px 24px;
+            text-align: center;
+            overflow: hidden
+        }
+
+        .machine-banner::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.07)
+        }
+
+        .machine-banner::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(0, 196, 240, 0.12)
+        }
+
+        .machine-type-tag {
+            display: inline-block;
+            background: var(--cyan);
+            color: var(--blue-dark);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 100px;
+            margin-bottom: 14px;
+            position: relative;
+            z-index: 1
+        }
+
+        .machine-icon-big {
+            font-size: 3.2rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            display: block
+        }
+        .machine-icon-big img {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .machine-banner-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #fff;
+            position: relative;
+            z-index: 1;
+            line-height: 1.2;
+            margin-bottom: 6px
+        }
+
+        .machine-banner-sub {
+            font-size: 11.5px;
+            color: rgba(255, 255, 255, 0.72);
+            position: relative;
+            z-index: 1
+        }
+
+        /* UV = cyan accent, RO = blue accent, RO+UV = gradient purple-cyan */
+        .machine-card.uv .machine-banner {
+            background: linear-gradient(135deg, #0a4f7a 0%, #0a9fc4 100%)
+        }
+
+        .machine-card.uv .machine-type-tag {
+            background: #00c4f0;
+            color: #002d40
+        }
+
+        .machine-card.ro .machine-banner {
+            background: linear-gradient(135deg, var(--blue-dark) 0%, #1585d8 100%)
+        }
+
+        .machine-card.ro .machine-type-tag {
+            background: #fdd17b;
+            color: #054d8a
+        }
+
+        .machine-card.rouv .machine-banner {
+            background: linear-gradient(135deg, #1a1a6e 0%, #054d8a 50%, #0a9fc4 100%)
+        }
+
+        .machine-card.rouv .machine-type-tag {
+            background: linear-gradient(90deg, #fdd17b, #00c4f0);
+            color: #0d1b2a
+        }
+
+        .machine-body {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 14px
+        }
+
+        .machine-feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+
+        .machine-feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5
+        }
+
+        .machine-feature-list li::before {
+            content: '✓';
+            color: var(--blue);
+            font-weight: 700;
+            font-size: 13px;
+            flex-shrink: 0;
+            margin-top: 1px
+        }
+
+        .machine-ideal {
+            background: var(--bg);
+            border-radius: 10px;
+            padding: 12px 14px;
+            font-size: 12.5px;
+            color: var(--blue-dark);
+            font-weight: 600;
+            border-left: 3px solid var(--blue)
+        }
+
+        .machine-ideal span {
+            color: var(--text-muted);
+            font-weight: 400
+        }
+
+        .machine-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--blue-dark);
+            color: #fff;
+            border-radius: 10px;
+            padding: 13px;
+            font-size: 13.5px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background .2s, transform .1s;
+            margin-top: auto
+        }
+
+        .machine-cta:hover {
+            background: #032e5a;
+            transform: translateY(-1px)
+        }
+
+        .machine-card.uv .machine-cta {
+            background: #0a6ebd
+        }
+
+        .machine-card.rouv .machine-cta {
+            background: linear-gradient(90deg, #054d8a, #0a9fc4)
+        }
+
+        /* ══ GALLERY ══ */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-top: 40px
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--r);
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            background: var(--blue-light)
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform .4s ease
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.07)
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(5, 77, 138, 0.75) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity .3s;
+            display: flex;
+            align-items: flex-end;
+            padding: 16px
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1
+        }
+
+        .gallery-overlay-text {
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600
+        }
+
+        /* placeholder when no real images */
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--blue-light), #e0f3ff);
+            min-height: 180px
+        }
+
+        .gallery-placeholder .ph-icon {
+            font-size: 2.2rem
+        }
+
+        .gallery-placeholder .ph-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--blue-dark);
+            text-align: center;
+            padding: 0 8px
+        }
+
+        /* Lightbox */
+        .lb-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.88);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px
+        }
+
+        .lb-overlay.open {
+            display: flex
+        }
+
+        .lb-inner {
+            position: relative;
+            max-width: 860px;
+            width: 100%
+        }
+
+        .lb-inner img {
+            width: 100%;
+            border-radius: 12px;
+            display: block;
+            max-height: 80vh;
+            object-fit: contain
+        }
+
+        .lb-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            line-height: 1
+        }
+
+        .lb-close:hover {
+            color: var(--cyan)
         }
 
         /* HOW IT WORKS */
@@ -1058,9 +1367,12 @@
             gap: 10px;
             animation: floatIn .6s ease .4s both
         }
-        .floating-wa,.floating-call {
-            box-sizing: border-box;
+
+        .floating-wa,
+        .floating-call {
+            box-sizing: border-box
         }
+
         @keyframes floatIn {
             from {
                 transform: translateY(40px);
@@ -1072,12 +1384,7 @@
                 opacity: 1
             }
         }
-@media (max-width: 620px) {
-  .floating-buttons {
-    bottom: 12px;
-    right: 8px;
-  }
-}
+
         .floating-wa {
             background: #25D366;
             color: #fff;
@@ -1139,6 +1446,14 @@
                 grid-template-columns: repeat(2, 1fr)
             }
 
+            .machines-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
             .why-grid {
                 grid-template-columns: repeat(2, 1fr)
             }
@@ -1170,14 +1485,6 @@
             .btn-wa-h {
                 padding: 9px 12px;
                 font-size: 13px
-            }
-            .btn-call-h {
-                    margin-top: -50px;
-            }
-
-            .btn-wa-h {
-                margin-left: -137px;
-                margin-top: 50px;
             }
 
             .hero {
@@ -1215,6 +1522,15 @@
 
             .services-grid {
                 grid-template-columns: 1fr
+            }
+
+            .machines-grid {
+                grid-template-columns: 1fr
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px
             }
 
             .why-grid {
@@ -1262,19 +1578,20 @@
             .contact-btns {
                 grid-template-columns: 1fr
             }
-            .floating-wa,
-    .floating-call {
-        width: 52px;
-        height: 52px;
-        padding: 0;
-        border-radius: 50%;
-        justify-content: center;
-    }
 
-    .floating-wa span,
-    .floating-call span {
-        display: none;
-    }
+            .floating-wa,
+            .floating-call {
+                width: 52px;
+                height: 52px;
+                padding: 0;
+                border-radius: 50%;
+                justify-content: center
+            }
+
+            .floating-wa .fa-label,
+            .floating-call .fa-label {
+                display: none
+            }
         }
 
         @media(max-width:400px) {
@@ -1290,7 +1607,7 @@
     <!-- HEADER -->
     <header class="header" id="top">
         <a href="#top" class="header-brand">
-            <img src="favicon.jpg" height="50px" width="50px" alt="">
+            <img src="favicon.jpg" height="50px" width="50px" alt="MUTHU AQUA Logo" onerror="this.style.display='none'">
             <div>
                 <div class="brand-name">MUTHU AQUA</div>
                 <div class="brand-tagline">Pure Water · Trusted Service · Trichy</div>
@@ -1347,23 +1664,20 @@
                     </div>
                 </div>
             </div>
-
             <div class="form-card" id="book">
                 <div class="form-card-title">Get a Free Quote / Demo</div>
                 <div class="form-card-sub">Fill in below — we'll contact you within minutes</div>
-                <div class="form-group">
-                    <label for="f-name">Your Name *</label>
-                    <input type="text" id="f-name" placeholder="E.g. Ravi Kumar" required>
-                </div>
-                <div class="form-group">
-                    <label for="f-phone">Mobile Number *</label>
-                    <input type="tel" id="f-phone" placeholder="+91 98765 43210" required>
-                </div>
+                <div class="form-group"><label for="f-name">Your Name *</label><input type="text" id="f-name"
+                        placeholder="E.g. Ravi Kumar" required></div>
+                <div class="form-group"><label for="f-phone">Mobile Number *</label><input type="tel" id="f-phone"
+                        placeholder="+91 98765 43210" required></div>
                 <div class="form-group">
                     <label for="f-service">What do you need? *</label>
                     <select id="f-service">
                         <option value="">-- Select a Service --</option>
                         <option>RO Purifier — Buy New</option>
+                        <option>UV Purifier — Buy New</option>
+                        <option>RO + UV Purifier — Buy New</option>
                         <option>RO Service / Repair</option>
                         <option>RO Installation</option>
                         <option>Filter / Membrane Replacement</option>
@@ -1371,11 +1685,8 @@
                         <option>Other</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label for="f-msg">Your Area / Details (Optional)</label>
-                    <textarea id="f-msg"
-                        placeholder="E.g. I'm in Srirangam, Trichy. My RO is not working well..."></textarea>
-                </div>
+                <div class="form-group"><label for="f-msg">Your Area / Details (Optional)</label><textarea id="f-msg"
+                        placeholder="E.g. I'm in Srirangam, Trichy. My RO is not working well..."></textarea></div>
                 <button class="btn-wa-submit" onclick="submitWA()">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path
@@ -1456,6 +1767,113 @@
         </div>
     </div>
 
+    <!-- ══ MACHINE TYPES ══ -->
+    <section class="section section-alt" id="machines">
+        <div class="section-inner">
+            <div class="section-label">Our Products</div>
+            <h2 class="section-title">Choose the Right <em>Water Purifier</em></h2>
+            <p class="section-sub">Not sure which machine is right for your home or office? Here's everything you need
+                to know about each type — so you can drink clean water with confidence.</p>
+            <div class="machines-grid">
+
+                <!-- UV Machine -->
+                <div class="machine-card uv">
+                    <div class="machine-banner">
+                        <div class="machine-type-tag">UV Technology</div>
+                        <span class="machine-icon-big"><img src="uv.avif" alt="UV Water Purifier"></span>
+                        <div class="machine-banner-title">UV Water Purifier</div>
+                        <div class="machine-banner-sub">Ultraviolet Disinfection</div>
+                    </div>
+                    <div class="machine-body">
+                        <ul class="machine-feature-list">
+                            <li>Uses UV rays to kill 99.9% of bacteria, viruses and microorganisms in water</li>
+                            <li>Does not remove dissolved salts or heavy metals — best for low TDS water (below 200 ppm)
+                            </li>
+                            <li>No water wastage — all purified water is used</li>
+                            <li>Low maintenance — UV lamp replacement every 12 months</li>
+                            <li>Fast purification — no storage tank needed in most models</li>
+                            <li>No chemicals used — completely safe and natural purification</li>
+                        </ul>
+                        <div class="machine-ideal">💡 <strong>Best For:</strong> <span>Homes with municipal /
+                                corporation water supply where TDS is already low but microbial contamination is a
+                                concern.</span></div>
+                        <a href="https://wa.me/918438424022?text=Hi%2C%20I%27m%20interested%20in%20a%20UV%20Water%20Purifier%20from%20MUTHU%20AQUA%2C%20Trichy."
+                            target="_blank" class="machine-cta">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            Enquire Now →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- RO Machine -->
+                <div class="machine-card ro">
+                    <div class="machine-banner">
+                        <div class="machine-type-tag">⭐ Most Popular</div>
+                        <span class="machine-icon-big"><img src="ro.png" alt="RO Water Purifier"></span>
+                        <div class="machine-banner-title">RO Water Purifier</div>
+                        <div class="machine-banner-sub">Reverse Osmosis Technology</div>
+                    </div>
+                    <div class="machine-body">
+                        <ul class="machine-feature-list">
+                            <li>Multi-stage filtration — sediment, carbon, RO membrane and post-carbon filters</li>
+                            <li>Removes dissolved salts, heavy metals, fluoride, nitrates and TDS effectively</li>
+                            <li>Best for high TDS water (above 200 ppm) — borewell, tanker or hard water</li>
+                            <li>Storage tank included — purified water available even during power cuts</li>
+                            <li>Reduces TDS to safe drinking levels (between 50–150 ppm output)</li>
+                            <li>Periodic filter and membrane replacement required every 6–12 months</li>
+                        </ul>
+                        <div class="machine-ideal">💡 <strong>Best For:</strong> <span>Homes using borewell water,
+                                tanker water or any source with high TDS, hardness or chemical contamination.</span>
+                        </div>
+                        <a href="https://wa.me/918438424022?text=Hi%2C%20I%27m%20interested%20in%20an%20RO%20Water%20Purifier%20from%20MUTHU%20AQUA%2C%20Trichy."
+                            target="_blank" class="machine-cta">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            Enquire Now →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- RO + UV Machine -->
+                <div class="machine-card rouv">
+                    <div class="machine-banner">
+                        <div class="machine-type-tag">Best Protection</div>
+                        <span class="machine-icon-big"><img src="ro+uv.png" alt="RO + UV Water Purifier"></span>
+                        <div class="machine-banner-title">RO + UV Purifier</div>
+                        <div class="machine-banner-sub">Dual-Stage Advanced Purification</div>
+                    </div>
+                    <div class="machine-body">
+                        <ul class="machine-feature-list">
+                            <li>Combines RO membrane filtration + UV disinfection for double-layer protection</li>
+                            <li>Removes dissolved salts, heavy metals AND kills all bacteria & viruses</li>
+                            <li>Ideal for all water sources — borewell, municipal, tanker and overhead tank</li>
+                            <li>UV stage acts as second safety check — even after RO-treated water</li>
+                            <li>Storage tank with UV keeps stored water sterile at all times</li>
+                            <li>The most complete and safest water purification system available</li>
+                        </ul>
+                        <div class="machine-ideal">💡 <strong>Best For:</strong> <span>Families wanting the highest
+                                level of water safety — tackles both chemical and microbial contamination
+                                together.</span></div>
+                        <a href="https://wa.me/918438424022?text=Hi%2C%20I%27m%20interested%20in%20an%20RO%2BUV%20Water%20Purifier%20from%20MUTHU%20AQUA%2C%20Trichy."
+                            target="_blank" class="machine-cta">
+                            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                            </svg>
+                            Enquire Now →
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
     <!-- SERVICES -->
     <section class="section" id="services">
         <div class="section-inner">
@@ -1468,50 +1886,152 @@
                     <div class="service-icon-wrap">💧</div>
                     <div class="service-name">RO Water Purifier Sales</div>
                     <div class="service-desc">Buy the best RO purifiers at the best prices. We supply top brands — Kent,
-                        Aquaguard, Pureit, Livpure and more — with warranty and free installation included.</div>
-                    <span class="service-badge">Free Installation Included</span>
+                        Aquaguard, Pureit, Livpure and more — with warranty and free installation included.</div><span
+                        class="service-badge">Free Installation Included</span>
                 </div>
                 <div class="service-card">
                     <div class="service-icon-wrap">🔧</div>
                     <div class="service-name">RO Service & Repair</div>
                     <div class="service-desc">RO not working? Low flow, bad taste, leakage or alert lights? Our expert
-                        technicians diagnose and fix any RO purifier — any brand — fast and reliably.</div>
-                    <span class="service-badge">All Brands Covered</span>
+                        technicians diagnose and fix any RO purifier — any brand — fast and reliably.</div><span
+                        class="service-badge">All Brands Covered</span>
                 </div>
                 <div class="service-card">
                     <div class="service-icon-wrap">🏗️</div>
                     <div class="service-name">Professional Installation</div>
                     <div class="service-desc">Proper, leak-proof installation by trained technicians. Full setup, TDS
-                        testing and usage demo — completed in under an hour at your home or office.</div>
-                    <span class="service-badge">Same-Day Available</span>
+                        testing and usage demo — completed in under an hour at your home or office.</div><span
+                        class="service-badge">Same-Day Available</span>
                 </div>
                 <div class="service-card">
                     <div class="service-icon-wrap">🔩</div>
                     <div class="service-name">Filter & Membrane Replacement</div>
                     <div class="service-desc">We supply and fit genuine sediment filters, carbon filters, RO membranes
-                        and UV lamps for all brands at fair prices using only certified spare parts.</div>
-                    <span class="service-badge">Genuine Parts Only</span>
+                        and UV lamps for all brands at fair prices using only certified spare parts.</div><span
+                        class="service-badge">Genuine Parts Only</span>
                 </div>
                 <div class="service-card">
                     <div class="service-icon-wrap">🧪</div>
                     <div class="service-name">Free Water Quality Testing</div>
                     <div class="service-desc">Not sure about your water's TDS or purity? We offer free water testing at
-                        your home to help you choose the right purifier and understand what you're drinking.</div>
-                    <span class="service-badge">Free of Charge</span>
+                        your home to help you choose the right purifier and understand what you're drinking.</div><span
+                        class="service-badge">Free of Charge</span>
                 </div>
                 <div class="service-card">
                     <div class="service-icon-wrap">🏢</div>
                     <div class="service-name">Commercial RO Solutions</div>
                     <div class="service-desc">High-capacity RO systems for offices, restaurants, schools and factories
-                        in Trichy. Custom solutions based on your water usage and TDS requirements.</div>
-                    <span class="service-badge">For Businesses</span>
+                        in Trichy. Custom solutions based on your water usage and TDS requirements.</div><span
+                        class="service-badge">For Businesses</span>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- ══ GALLERY ══ -->
+    <section class="section section-alt" id="gallery">
+        <div class="section-inner">
+            <div class="section-label">Our Work</div>
+            <h2 class="section-title">Gallery — <em>Our Installations & Products</em></h2>
+            <p class="section-sub">A glimpse of our work across homes and businesses in Trichy. Replace the images below
+                with your own photos by updating the <code>src</code> of each &lt;img&gt; tag.</p>
+            <div class="gallery-grid">
+
+                <!-- Image 1 -->
+                <div class="gallery-item" onclick="openLb(this)">
+                    <img src="gallery/g1.png" alt="RO Purifier Installation Trichy"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'><div class=\'ph-icon\'>💧</div><div class=\'ph-label\'>RO Installation<br>Add photo: gallery/1.jpg</div></div>'">
+                    <div class="gallery-overlay">
+                        <div class="gallery-overlay-text">RO Installation</div>
+                    </div>
+                </div>
+
+                <!-- Image 2 -->
+                <div class="gallery-item" onclick="openLb(this)">
+                    <img src="gallery/g2.png" alt="UV Purifier Setup"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'><div class=\'ph-icon\'>☀️</div><div class=\'ph-label\'>UV Purifier Setup<br>Add photo: gallery/2.jpg</div></div>'">
+                    <div class="gallery-overlay">
+                        <div class="gallery-overlay-text">UV Purifier Setup</div>
+                    </div>
+                </div>
+
+                <!-- Image 3 -->
+                <div class="gallery-item" onclick="openLb(this)">
+                    <img src="gallery/g3.png" alt="RO+UV System"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'><div class=\'ph-icon\'>🛡️</div><div class=\'ph-label\'>RO+UV System<br>Add photo: gallery/3.jpg</div></div>'">
+                    <div class="gallery-overlay">
+                        <div class="gallery-overlay-text">RO + UV System</div>
+                    </div>
+                </div>
+
+                <!-- Image 4 -->
+                <div class="gallery-item" onclick="openLb(this)">
+                    <img src="gallery/g4.png" alt="Filter Replacement Service"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'><div class=\'ph-icon\'>🔩</div><div class=\'ph-label\'>Filter Replacement<br>Add photo: gallery/4.jpg</div></div>'">
+                    <div class="gallery-overlay">
+                        <div class="gallery-overlay-text">Filter Replacement</div>
+                    </div>
+                </div>
+
+                <!-- Image 5 -->
+                <div class="gallery-item" onclick="openLb(this)">
+                    <img src="gallery/g5.png" alt="Water Quality Testing"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'><div class=\'ph-icon\'>🧪</div><div class=\'ph-label\'>Water Quality Testing<br>Add photo: gallery/5.jpg</div></div>'">
+                    <div class="gallery-overlay">
+                        <div class="gallery-overlay-text">Water Quality Testing</div>
+                    </div>
+                </div>
+
+                <!-- Image 6 -->
+                <div class="gallery-item" onclick="openLb(this)">
+                    <img src="gallery/g6.png" alt="Commercial RO System"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'><div class=\'ph-icon\'>🏢</div><div class=\'ph-label\'>Commercial RO System<br>Add photo: gallery/6.jpg</div></div>'">
+                    <div class="gallery-overlay">
+                        <div class="gallery-overlay-text">Commercial RO System</div>
+                    </div>
+                </div>
+
+                <!-- Image 7 -->
+                <div class="gallery-item" onclick="openLb(this)">
+                    <img src="gallery/g7.png" alt="Service & Repair Work"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'><div class=\'ph-icon\'>🔧</div><div class=\'ph-label\'>Service & Repair<br>Add photo: gallery/7.jpg</div></div>'">
+                    <div class="gallery-overlay">
+                        <div class="gallery-overlay-text">Service & Repair</div>
+                    </div>
+                </div>
+
+                <!-- Image 8 -->
+                <div class="gallery-item" onclick="openLb(this)">
+                    <img src="gallery/g8.png" alt="Under Sink RO Setup"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'><div class=\'ph-icon\'>🏠</div><div class=\'ph-label\'>Under Sink RO Setup<br>Add photo: gallery/8.jpg</div></div>'">
+                    <div class="gallery-overlay">
+                        <div class="gallery-overlay-text">Under Sink RO Setup</div>
+                    </div>
+                </div>
+
+                <!-- Image 9 -->
+                <div class="gallery-item" onclick="openLb(this)">
+                    <img src="gallery/g9.png" alt="Happy Customer"
+                        onerror="this.parentElement.innerHTML='<div class=\'gallery-placeholder\'><div class=\'ph-icon\'>😊</div><div class=\'ph-label\'>Happy Customer<br>Add photo: gallery/9.jpg</div></div>'">
+                    <div class="gallery-overlay">
+                        <div class="gallery-overlay-text">Happy Customer</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lb-overlay" id="lb" onclick="closeLb()">
+        <div class="lb-inner" onclick="event.stopPropagation()">
+            <button class="lb-close" onclick="closeLb()">✕</button>
+            <img id="lb-img" src="" alt="">
+        </div>
+    </div>
+
     <!-- WHY US -->
-    <section class="section section-alt" id="why">
+    <section class="section" id="why">
         <div class="section-inner">
             <div class="section-label">Why MUTHU AQUA</div>
             <h2 class="section-title">Why Trichy Trusts <em>MUTHU AQUA</em></h2>
@@ -1559,7 +2079,7 @@
     </section>
 
     <!-- REVIEWS -->
-    <section class="section" id="reviews">
+    <section class="section section-alt" id="reviews">
         <div class="section-inner">
             <div class="section-label">Customer Reviews</div>
             <h2 class="section-title">What Our Customers <em>Say</em></h2>
@@ -1591,12 +2111,9 @@
             </div>
             <div class="reviews-summary">
                 <div class="reviews-score">⭐ 4.9</div>
-                <div class="reviews-text">
-                    <strong>Highly rated by Trichy customers</strong> for fast service, transparent pricing and quality
-                    work.<br>
-                    Serving Srirangam, Thillai Nagar, K.K. Nagar, Ariyamangalam, Woraiyur, Cantonment, Palakarai & all
-                    of Trichy.
-                </div>
+                <div class="reviews-text"><strong>Highly rated by Trichy customers</strong> for fast service,
+                    transparent pricing and quality work.<br>Serving Srirangam, Thillai Nagar, K.K. Nagar,
+                    Ariyamangalam, Woraiyur, Cantonment, Palakarai & all of Trichy.</div>
             </div>
         </div>
     </section>
@@ -1627,7 +2144,7 @@
     </section>
 
     <!-- LOCATION -->
-    <section class="section section-alt" id="location">
+    <section class="section" id="location">
         <div class="section-inner">
             <div class="section-label">Find Us</div>
             <h2 class="section-title">We Serve All of <em>Trichy</em></h2>
@@ -1667,36 +2184,30 @@
                         </div>
                     </div>
                     <div class="contact-btns">
-                        <a href="tel:+919345158022" class="btn-call-loc">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
+                        <a href="tel:+919345158022" class="btn-call-loc"><svg width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2">
                                 <path
                                     d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.77 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012.68 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.5a16 16 0 006.59 6.59l1.06-1.06a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
-                            </svg>
-                            Call Us
-                        </a>
+                            </svg>Call Us</a>
                         <a href="https://wa.me/918438424022?text=Hi%2C%20I%20need%20RO%20service%20in%20Trichy."
-                            target="_blank" class="btn-wa-loc">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                            target="_blank" class="btn-wa-loc"><svg width="16" height="16" viewBox="0 0 24 24"
+                                fill="currentColor">
                                 <path
                                     d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-                            </svg>
-                            WhatsApp Us
-                        </a>
+                            </svg>WhatsApp Us</a>
                     </div>
                 </div>
                 <div class="map-embed">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125676.97!2d78.6569!3d10.7905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf50ff5b7e3bb%3A0x8f679e2da7f97ef7!2sTiruchirappalli%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1"
-                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                        title="MUTHU AQUA Trichy Location"></iframe>
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d258323.5313646052!2d78.6890279!3d10.8158228!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf54886c3b191%3A0xbc90dc4eac17b794!2sMuthu%20Aqua!5e1!3m2!1sen!2sin!4v1774845160930!5m2!1sen!2sin"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section" id="faq">
+    <section class="section section-alt" id="faq">
         <div class="section-inner">
             <div class="section-label">FAQ</div>
             <h2 class="section-title">Common Questions <em>Answered</em></h2>
@@ -1708,7 +2219,7 @@
                         </svg></div>
                     <div class="faq-a">Common signs include low water flow, bad taste or smell, unusual noises, water
                         leakage, or a flashing alert light. If you haven't serviced it in over 6 months, it's due for a
-                        check-up. Call us and our technician will diagnose it for you.</div>
+                        check-up.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-q" onclick="toggleFaq(this)">How often should I service my RO purifier?<svg
@@ -1718,6 +2229,16 @@
                     <div class="faq-a">We recommend a full service every 6 months. Filters should be replaced every 6–12
                         months and the RO membrane every 12–24 months, depending on your usage and water TDS level.
                     </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q" onclick="toggleFaq(this)">What is the difference between RO, UV and RO+UV?<svg
+                            class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg></div>
+                    <div class="faq-a">RO removes dissolved salts and heavy metals (best for high TDS water). UV kills
+                        bacteria and viruses using ultraviolet light (best for low TDS municipal water). RO+UV combines
+                        both for the highest level of protection — removing chemicals and killing microbes. See our <a
+                            href="#machines">Machine Types section</a> above for full details.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-q" onclick="toggleFaq(this)">Do you service all brands of RO purifiers?<svg
@@ -1742,17 +2263,7 @@
                             <polyline points="6 9 12 15 18 9" />
                         </svg></div>
                     <div class="faq-a">Standard under-sink or wall-mount RO installation takes about 45–90 minutes. Our
-                        technician handles all plumbing connections, fittings and final testing. You just need a
-                        suitable spot near your kitchen sink.</div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-q" onclick="toggleFaq(this)">Do you use genuine spare parts?<svg class="arrow"
-                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="6 9 12 15 18 9" />
-                        </svg></div>
-                    <div class="faq-a">Absolutely. We only use certified filters, membranes and UV lamps — not cheap
-                        market substitutes. Genuine parts ensure your water stays truly purified and your machine lasts
-                        longer.</div>
+                        technician handles all plumbing connections, fittings and final testing.</div>
                 </div>
                 <div class="faq-item">
                     <div class="faq-q" onclick="toggleFaq(this)">How do I book a service or get a free demo?<svg
@@ -1760,7 +2271,7 @@
                             <polyline points="6 9 12 15 18 9" />
                         </svg></div>
                     <div class="faq-a">The easiest way is to <a href="#book">fill the form above</a>, click "Book via
-                        WhatsApp" or call us directly at +91 99999 99999. We'll schedule a visit at your convenience
+                        WhatsApp" or call us directly at +91 93451 58022. We'll schedule a visit at your convenience
                         anywhere in Trichy.</div>
                 </div>
             </div>
@@ -1785,6 +2296,8 @@
         </div>
         <div class="footer-links">
             <a href="#services">Services</a>
+            <a href="#machines">Products</a>
+            <a href="#gallery">Gallery</a>
             <a href="#why">Why Us</a>
             <a href="#reviews">Reviews</a>
             <a href="#location">Location</a>
@@ -1797,9 +2310,10 @@
             &nbsp;·&nbsp;
             <a href="https://wa.me/918438424022" target="_blank">WhatsApp Us</a>
         </p>
-        <p style="margin-bottom:16px">RO Sales · Service & Repair · Professional Installation · All Brands</p>
-        <p style="font-size:11px;">© 2026 <a href="#">MUTHU AQUA</a>. All rights reserved.| Designed &
-            Developed by <a href="https://ctvsoftwaresolutions.com/" target="_blank">CTV Software Solutions</a></p>
+        <p style="margin-bottom:16px">RO Sales · UV Sales · RO+UV Sales · Service & Repair · Professional Installation ·
+            All Brands</p>
+        <p style="font-size:11px;">© 2026 <a href="#">MUTHU AQUA</a>. All rights reserved. | Designed & Developed by <a
+                href="https://ctvsoftwaresolutions.com/" target="_blank">CTV Software Solutions</a></p>
     </footer>
 
     <!-- FLOATING BUTTONS -->
@@ -1836,6 +2350,20 @@
             window.open('https://wa.me/918438424022?text=' + encodeURIComponent(text), '_blank');
         }
         function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
+
+        /* Lightbox */
+        function openLb(el) {
+            var img = el.querySelector('img');
+            if (!img) return;
+            document.getElementById('lb-img').src = img.src;
+            document.getElementById('lb').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeLb() {
+            document.getElementById('lb').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
     </script>
 </body>
 
