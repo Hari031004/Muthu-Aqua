@@ -891,6 +891,27 @@
         .lb-close:hover {
             color: var(--cyan)
         }
+        .lb-prev,
+.lb-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: #fff;
+    background: rgba(0,0,0,0.4);
+    border: none;
+    padding: 10px 14px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.lb-prev { left: -50px; }
+.lb-next { right: -50px; }
+
+.lb-prev:hover,
+.lb-next:hover {
+    background: rgba(0,0,0,0.7);
+}
 
         /* HOW IT WORKS */
         .steps-list {
@@ -1229,7 +1250,7 @@
             border-radius: var(--r);
             overflow: hidden;
             border: 1.5px solid var(--border);
-            height: 320px
+            height: 450px
         }
 
         .map-embed iframe {
@@ -1241,11 +1262,14 @@
 
         /* FAQ */
         .faq-list {
-            margin-top: 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px
-        }
+    column-count: 2;
+    column-gap: 16px;
+}
+
+.faq-item {
+    break-inside: avoid;
+    margin-bottom: 16px;
+}
 
         .faq-item {
             background: var(--white);
@@ -1432,6 +1456,20 @@
         }
 
         /* RESPONSIVE */
+        .faq-list {
+    column-count: 2;
+    column-gap: 16px;
+}
+
+.faq-item {
+    break-inside: avoid;
+    margin-bottom: 16px;
+}
+        @media(max-width: 768px){
+        .faq-list {
+        grid-template-columns: 1fr;
+        }
+    }
         @media(max-width:960px) {
             .hero-inner {
                 grid-template-columns: 1fr;
@@ -1677,9 +1715,9 @@
                 <div class="form-card-title">Get a Free Quote / Demo</div>
                 <div class="form-card-sub">Fill in below — we'll contact you within minutes</div>
                 <div class="form-group"><label for="f-name">Your Name *</label><input type="text" id="f-name"
-                        placeholder="E.g. Ravi Kumar" required></div>
+                        placeholder="Name" required></div>
                 <div class="form-group"><label for="f-phone">Mobile Number *</label><input type="tel" id="f-phone"
-                        placeholder="+91 98765 43210" required></div>
+                        placeholder="Mobile Number" required></div>
                 <div class="form-group">
                     <label for="f-service">What do you need? *</label>
                     <select id="f-service">
@@ -2032,12 +2070,23 @@
     </section>
 
     <!-- Lightbox -->
+     
     <div class="lb-overlay" id="lb" onclick="closeLb()">
-        <div class="lb-inner" onclick="event.stopPropagation()">
-            <button class="lb-close" onclick="closeLb()">✕</button>
-            <img id="lb-img" src="" alt="">
-        </div>
+    <div class="lb-inner" onclick="event.stopPropagation()">
+
+        <button class="lb-close" onclick="closeLb()">✕</button>
+
+        <!-- PREV -->
+        <button class="lb-prev" onclick="prevImg()">❮</button>
+
+        <!-- IMAGE -->
+        <img id="lb-img" src="" alt="">
+
+        <!-- NEXT -->
+        <button class="lb-next" onclick="nextImg()">❯</button>
+
     </div>
+</div>
 
     <!-- WHY US -->
     <section class="section" id="why">
@@ -2207,9 +2256,7 @@
                     </div>
                 </div>
                 <div class="map-embed">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d258323.5313646052!2d78.6890279!3d10.8158228!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf54886c3b191%3A0xbc90dc4eac17b794!2sMuthu%20Aqua!5e1!3m2!1sen!2sin!4v1774845160930!5m2!1sen!2sin"
-                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d240180.90021973138!2d78.68760143696161!3d10.812977649965502!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baaf54886c3b191%3A0xbc90dc4eac17b794!2sMuthu%20Aqua!5e0!3m2!1sen!2sin!4v1774939716302!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>
@@ -2321,7 +2368,7 @@
         </p>
         <p style="margin-bottom:16px">RO Sales · UV Sales · RO+UV Sales · Service & Repair · Professional Installation ·
             All Brands</p>
-        <p style="font-size:11px;">© 2026 <a href="#">MUTHU AQUA</a>. All rights reserved. | Designed & Developed by <a href="#">Hari</a></p>
+        <p style="font-size:11px;">© 2026 <a href="#">MUTHU AQUA</a>. All rights reserved. <br> Powered by <a href="https://ctvsoftwaresolutions.com/" target="_blank">CTV Software Solutions</a> | Designed by <a href="#">Hari</a></p>
     </footer>
 
     <!-- FLOATING BUTTONS -->
@@ -2342,7 +2389,50 @@
             <span class="fa-label">Call Now</span>
         </a>
     </div>
+<script>
+const faqItems = document.querySelectorAll(".faq-item");
 
+faqItems.forEach(item => {
+    const question = item.querySelector(".faq-q");
+
+    question.addEventListener("click", () => {
+
+        // close all
+        faqItems.forEach(i => {
+            if(i !== item){
+                i.classList.remove("open");
+            }
+        });
+
+        // toggle current
+        item.classList.toggle("open");
+    });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const faqItems = document.querySelectorAll(".faq-item");
+
+    faqItems.forEach(item => {
+        const question = item.querySelector(".faq-q");
+
+        question.addEventListener("click", () => {
+
+            // close others
+            faqItems.forEach(i => {
+                if (i !== item) {
+                    i.classList.remove("open");
+                }
+            });
+
+            // toggle current
+            item.classList.toggle("open");
+        });
+    });
+
+});
+</script>
     <script>
         function submitWA() {
             var name = document.getElementById('f-name').value.trim();
@@ -2360,18 +2450,44 @@
         function toggleFaq(el) { el.parentElement.classList.toggle('open'); }
 
         /* Lightbox */
-        function openLb(el) {
-            var img = el.querySelector('img');
-            if (!img) return;
-            document.getElementById('lb-img').src = img.src;
-            document.getElementById('lb').classList.add('open');
-            document.body.style.overflow = 'hidden';
-        }
-        function closeLb() {
-            document.getElementById('lb').classList.remove('open');
-            document.body.style.overflow = '';
-        }
-        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+        let images = [];
+let currentIndex = 0;
+
+document.addEventListener("DOMContentLoaded", () => {
+    images = Array.from(document.querySelectorAll(".gallery-item img"));
+});
+
+function openLb(el) {
+    const img = el.querySelector("img");
+    if (!img) return;
+
+    currentIndex = images.indexOf(img);
+
+    document.getElementById("lb-img").src = img.src;
+    document.getElementById("lb").classList.add("open");
+    document.body.style.overflow = "hidden";
+}
+
+function closeLb() {
+    document.getElementById("lb").classList.remove("open");
+    document.body.style.overflow = "";
+}
+
+function nextImg() {
+    currentIndex = (currentIndex + 1) % images.length;
+    document.getElementById("lb-img").src = images[currentIndex].src;
+}
+
+function prevImg() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    document.getElementById("lb-img").src = images[currentIndex].src;
+}
+
+document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeLb();
+    if (e.key === "ArrowRight") nextImg();
+    if (e.key === "ArrowLeft") prevImg();
+});
     </script>
 </body>
 
